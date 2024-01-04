@@ -84,4 +84,25 @@ docker compose up -d
 - InfluxDB:
 
    ![Influx DB](https://github.com/tklakla/home_assistant/assets/54936857/6f50d8d6-beab-405f-8df5-36314467a748)
+- Grafana:
 
+  ![Grafana](https://github.com/tklakla/home_assistant/assets/54936857/14481a84-c5fc-4cb5-94fd-65a3e7943911)
+
+8. And finally, add Home Assistant sensors to configuration.yaml:
+```
+mqtt:
+  sensor:
+    - name: "Outside Temperature"
+      state_topic: "rtl433/devices/Bresser-7in1/43971/temperature_C"
+      state_class: measurement
+      device_class: temperature
+      unit_of_measurement: '°C'
+    - name: "Outside Humidity"
+      state_topic: "rtl433/devices/Bresser-7in1/43971/humidity"
+      state_class: measurement
+      device_class: humidity
+      unit_of_measurement: '%'
+```
+9. That's all Folks!:
+
+![image](https://github.com/tklakla/home_assistant/assets/54936857/786f60f0-3446-4723-a2be-a4fa22c97c89)
