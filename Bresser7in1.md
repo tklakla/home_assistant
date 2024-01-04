@@ -1,6 +1,6 @@
 # Weather Station with Home Assistant
 ## Hardware:
-- Bresser 7in1 Weather Center ClimateScout (should working with any radio frequency weather station)
+- Bresser 7in1 Weather Center ClimateScout (should working with any Radio Frequency weather station)
 - USB TV Tuner (or any RTL-SDR receiver with RTL2832U)
 ![Bresser 7in1](https://github.com/tklakla/home_assistant/assets/54936857/43a8070d-1df8-45c6-9953-a279224ba58e)
 ![Elistooop TV Tuner](https://github.com/tklakla/home_assistant/assets/54936857/81a68740-d3db-4836-aea4-a04afbe04316)
