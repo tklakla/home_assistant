@@ -7,8 +7,8 @@
 ## Software stack
 - Linux Debian 11
 - Docker Compose
-- RTL 433 To MQTT (https://hub.docker.com/r/bademux/rtl_433tomqtt) or RTL 433 by hertzg (https://hub.docker.com/r/hertzg/rtl_433)
-- Mosquitto (https://hub.docker.com/_/eclipse-mosquitto)
+- RTL 433 by hertzg (https://hub.docker.com/r/hertzg/rtl_433) or RTL 433 To MQTT (https://hub.docker.com/r/bademux/rtl_433tomqtt)
+- MosquittoMQTT (https://hub.docker.com/_/eclipse-mosquitto)
 - Influx DB (https://hub.docker.com/_/influxdb)
 
 1. Insert USB dongle into the host, check if is visible:
@@ -35,7 +35,7 @@ lsusb
 > 
 > Bus 001 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
 
-  It means idVendor=Obda, idProduct=2838
+  It means idVendor = Obda, idProduct = 2838
 
 2. Update USB rules in **/etc/udev/rules.d** creating **99-rtl_sdr.rules** file:
 ```
@@ -48,12 +48,15 @@ udevadm control --reload-rules && udevadm trigger
 ```
 4. Update your docker-compose.yml file:
 ```
-  rtl-433tomqtt:
-    container_name: rtl-433tomqtt
-    image: bademux/rtl_433tomqtt:latest
+  rtl433:
+    container_name: ${PREFIX}-rtl433
+    image: hertzg/rtl_433:23.11-debian
+    #image: bademux/rtl_433tomqtt:latest
     restart: unless-stopped
+    networks: 
+      - app_tier
     volumes:
-      - ./rtl_433.conf:/etc/rtl_433/rtl_433.conf:ro
+      - ./rtl_433.conf:/root/rtl_433.conf
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     devices:
@@ -75,7 +78,7 @@ protocol 173 # Bresser Weather Center 7-in-1
 docker compose up -d
 ```
 > Note:
->>  During testing, changing the USB port helps
+>>  During testing, changing the USB port helps!
 >> 
 7. Check that everything is working:
 - MQTT Explorer:
